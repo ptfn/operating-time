@@ -3,7 +3,7 @@ def fib (n):
         return n
     else:
         return(fib(n-1)+ fib(n-2))
-print(fib(40))
+print(fib(10))
 # def Fi (n):
 #     if n <= 2:
 #         return n
