@@ -4,7 +4,7 @@ if Select == "1":
   #Данные и ключ
   print("---Шифрование---")
   text = input("Введите текст:")
-  key = random.randrange(1024,4398046511104)
+  key = random.randrange(1024, 4398046511104)
   print("Ключ:",key)
   #Шифрование
   def encrypt (text,key):

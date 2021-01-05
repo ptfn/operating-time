@@ -1,4 +1,5 @@
-import hashlib, os
+import hashlib
+import os
 
 file_name = input('Имя файла:')
 file = open(file_name, 'r')
@@ -14,6 +15,6 @@ hash_sha1 = hashlib.sha1(str(hash).encode()).hexdigest()
 hash_sha256 = hashlib.sha256(str(hash).encode()).hexdigest()
 
 print("size: {} byte".format(folder_size))
-print("md5:",hash_md5)
-print("sha1:",hash_sha1)
-print("sha256:",hash_sha256)
+print("md5:", hash_md5)
+print("sha1:", hash_sha1)
+print("sha256:", hash_sha256)

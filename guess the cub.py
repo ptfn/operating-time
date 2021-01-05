@@ -19,5 +19,5 @@ while True:
     else:
 
         print('--Проигрыш--')
-        print("Загаданное число:",ran_num)
-        break   
+        print("Загаданное число:", ran_num)
+        break

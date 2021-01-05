@@ -3,7 +3,7 @@ import time
 
 Start_Time = time.time()
 Password = ""
-Correct_Password = "2020"  # Нужный пароль
+Correct_Password = "12345"  # Нужный пароль
 Length = len(Correct_Password)
 Chars = "0123456789"  # Алфавит из всего
 Wrong_Passwords = []
