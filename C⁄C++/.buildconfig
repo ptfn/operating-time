@@ -1,0 +1,10 @@
+[default-3]
+name=Default (Copy) (Copy)
+runtime=host
+toolchain=default
+config-opts=
+run-opts=
+prefix=/home/ptfn/.cache/gnome-builder/install/C⁄C++/host
+app-id=
+postbuild=
+prebuild=
