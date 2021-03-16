@@ -1,5 +1,6 @@
 from tkinter import Tk, Canvas, Frame, BOTH
 import random
+import sys
 
 class Point():
   def __init__(self, x, y, color):
@@ -49,8 +50,8 @@ class Example(Frame):
             return Point(x,y,"blue")
 
         i = 0
-        
-        while i < 10000:
+        num = int(sys.argv[1]) # argument
+        while i < num:
             random_dot = random.randrange(0,300)
           
             if random_dot > 0 & random_dot < 100:

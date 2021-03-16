@@ -1,9 +1,11 @@
+import sys
 import random
 import matplotlib.pyplot as plt
 
 X = [0]
 Y = [0]
-for n in range(100000):
+num = int(sys.argv[1])
+for n in range(num):
     r = random.uniform(0, 100)
     if r < 1.0:
         x = 0
