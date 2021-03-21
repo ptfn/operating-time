@@ -1,4 +1,3 @@
-
 import psutil as ps
 from prettytable import PrettyTable
 
