@@ -70,7 +70,7 @@ class Example(Frame):
 def main():
     root = Tk()
     _ex = Example(root)
-    root.geometry("500x500")
+    root.geometry("512x512")
     root.mainloop()  
  
 if __name__ == '__main__':
