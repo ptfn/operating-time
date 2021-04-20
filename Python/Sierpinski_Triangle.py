@@ -9,17 +9,17 @@ class Point():
     self.color = color
 
   def paint(self, canvas):
-    canvas.create_rectangle(self.x, self.y, self.x + 1, self.y + 1, outline = self.color, width = 4)
+    canvas.create_rectangle(self.x, self.y, self.x + 1, self.y + 1, outline = self.color, width = 1)
  
 class Example(Frame):
   
     def __init__(self, parent):
-        Frame.__init__(self, parent , background = "black")   
+        Frame.__init__(self, parent , background = "white")   
         self.parent = parent        
         self.initUI()     
     
     def initUI(self):
-        self.parent.title("Треугольник")        
+        self.parent.title("Sierpinski Triangle")        
         self.pack(fill=BOTH, expand=1)
         
         canvas = Canvas(self)
@@ -34,7 +34,7 @@ class Example(Frame):
         c = Point(random.randrange(50, 300), random.randrange(50, 300), "green")
         c.paint(canvas)
 
-        first = Point(random.randrange(50, 200), random.randrange(50, 2000), "red")
+        first = Point(random.randrange(50, 200), random.randrange(50, 200), "red")
         first.paint(canvas)
 
         def calcPoint(p1:Point, p2:Point):
@@ -56,13 +56,13 @@ class Example(Frame):
           
             if random_dot > 0 & random_dot < 100:
                 newp = calcPoint(p1 = a, p2 = first)
-          
+                first = newp
             if random_dot > 101 & random_dot < 200:
                 newp = calcPoint(p1 = b, p2 = first)
-            
+                first = newp
             if random_dot > 201 & random_dot < 300:
                 newp = calcPoint(p1 = c, p2 = first)
-
+                first = newp
             newp.paint(canvas)
             first = newp
             i = i + 1
@@ -70,6 +70,7 @@ class Example(Frame):
 def main():
     root = Tk()
     _ex = Example(root)
+    root.configure(bg='white')
     root.geometry("512x512")
     root.mainloop()  
  

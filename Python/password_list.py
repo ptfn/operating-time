@@ -1,5 +1,4 @@
 import random
-import time
 
 chars = "!@#$%^&*=<>0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
