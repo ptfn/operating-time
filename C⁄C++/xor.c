@@ -12,14 +12,14 @@ int decrypt(int text, int key){
 }
 
 int main(void){
-    int text, key;
+    unsigned long text, key;
     char menu[1];
 
     printf("Text:");
-    scanf("%d", &text);
+    scanf("%ld", &text);
 
     printf("Key:");
-    scanf("%d", &key);
+    scanf("%ld", &key);
 
     printf("Menu:");
     scanf("%s", &menu);
