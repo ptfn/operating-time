@@ -1,1 +1,1 @@
-(print("Hello World!"))
+(print (format t"Hello World!"))
