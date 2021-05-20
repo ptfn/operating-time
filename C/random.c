@@ -7,7 +7,7 @@ unsigned int rand(){
 }
 
 int main(){
-    for(int n = 0; n <= 50; n++){
+    for(int n = 0; n <= 10; n++){
         printf("%d:\t%d\n",n+1,rand());
     }
 }

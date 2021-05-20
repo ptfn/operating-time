@@ -1,16 +1,14 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int factal(int n);
-
-int main() {
-    printf("Factal 10 = %d\n",factal(10));
-    return 0;
-}
-
-int factal(int n){
+int fac(int n){
     int res;
     if(n == 1) return n;
-    res = factal(n-1)*n;
+    res = fac(n-1)*n;
     return res;
+}
 
+int main() {
+    int n = 30;
+    printf("Factal %d = %d\n", n, fac(n));
+    return 0;
 }
