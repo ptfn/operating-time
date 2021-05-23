@@ -14,7 +14,7 @@ class Point():
 class Example(Frame):
   
     def __init__(self, parent):
-        Frame.__init__(self, parent , background = "white")   
+        Frame.__init__(self, parent , background = "black")   
         self.parent = parent        
         self.initUI()     
     
@@ -25,16 +25,16 @@ class Example(Frame):
         canvas = Canvas(self)
         canvas.pack(fill=BOTH, expand=1)
 
-        a = Point(random.randrange(50, 300), random.randrange(50, 300), "green")
+        a = Point(random.randrange(10, 500), random.randrange(10, 500), "green")
         a.paint(canvas)
 
-        b = Point(random.randrange(50, 300), random.randrange(50, 300), "green")
+        b = Point(random.randrange(10, 500), random.randrange(10, 500), "green")
         b.paint(canvas)
 
-        c = Point(random.randrange(50, 300), random.randrange(50, 300), "green")
+        c = Point(random.randrange(10, 500), random.randrange(10, 500), "green")
         c.paint(canvas)
 
-        first = Point(random.randrange(50, 200), random.randrange(50, 200), "red")
+        first = Point(random.randrange(100, 400), random.randrange(100, 400), "red")
         first.paint(canvas)
 
         def calcPoint(p1:Point, p2:Point):
@@ -70,7 +70,7 @@ class Example(Frame):
 def main():
     root = Tk()
     _ex = Example(root)
-    root.configure(bg='white')
+    root.configure(bg='black')
     root.geometry("512x512")
     root.mainloop()  
  
