@@ -1,23 +1,60 @@
 import random
-Select = input("Шифровать(1) или Дешифровать(2):")
-if Select == "1":
-  #Данные и ключ
-  print("---Шифрование---")
-  text = input("Введите текст:")
-  key = random.randrange(1024, 4398046511104)
-  print("Ключ:",key)
-  #Шифрование
-  def encrypt (text,key):
-    encrypt_text = int(text) ^ int(key)
-    return encrypt_text
-  print("Зашифрованный текст:",encrypt(text,key))
-elif Select == "2":
-  #Данные и ключ
-  print("---Дешифрование---")
-  text = input("Введите зашифрованный текст:")
-  key = input("Введите ключ:")
-  #Дешифрование
-  def dencrypt (text,key):
-    dencrypt_text = int(text) ^ int(key)
-    return dencrypt_text
-  print("Текст:",dencrypt(text,key))
+
+def StrToList(string):
+    result = []
+    for i in range(len(string)):
+        result.append(ord(string[i]))
+    return result
+
+
+def ListToStr(arr):
+    result = ""
+    for i in range(len(arr)):
+        result += chr(arr[i])
+    return result
+
+
+def GenKey(string):
+    chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    key = ""
+    for i in range(len(string)):
+        key += random.choice(chars)
+    return key
+
+
+def Encrypt(string, key):
+    key_num = StrToList(key)
+    str_num = StrToList(string)
+    enc = []
+    for i in range(len(str_num)):
+        enc.append(str_num[i] ^ key_num[i])
+    res = ListToStr(enc)    
+    return res
+
+
+def Decrypt(string, key):
+    str_num = StrToList(string)
+    key_num = StrToList(key)
+    dec = []
+    for i in range(len(str_num)):
+        dec.append(str_num[i] ^ key_num[i])
+    res = ListToStr(dec)    
+    return res
+
+
+string = input("Text:")
+choice = input("Encrypt or Decrypt:")
+
+if choice == "Encrypt" or choice == "enc":
+    key = GenKey(string)
+    print("Key:",key)
+    enc = Encrypt(string, key)
+    print("Enc_Text:",enc)
+
+elif choice == "Decrypt" or choice == 'dec':
+    key = input("Key:")
+    de = Decrypt(string, key)
+    print("Dec_Text:",de)
+
+else:
+    print("Error")
