@@ -1,0 +1,5 @@
+(define (lp i)
+    (when (< i 5)
+        (display i)
+        (lp (+ 1 i))))
+(display (lp 5))
