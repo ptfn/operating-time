@@ -1,6 +1,0 @@
-(defun fib (n)
-  (if (> n 1)
-      (+ (fib (- n 1))
-         (fib (- n 2)))
-      n))
-(print (fib 10))
