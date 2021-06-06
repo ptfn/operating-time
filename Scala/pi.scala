@@ -9,8 +9,7 @@ object pi extends App{
             pi += oper * (num / den)
             den += 2.0
             oper *= -1.0
-            i -= 1
-            }
+            i -= 1}
         return pi
     }
     println("Pi:" + pi(args(0).toInt))
