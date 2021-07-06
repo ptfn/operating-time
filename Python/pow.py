@@ -1,7 +1,6 @@
 def pow(n, m):
     arr = []
     res = 1
-
     while True:
         if m % 2 != 0:
             arr.append(n)
@@ -9,7 +8,6 @@ def pow(n, m):
             break
         m = m // 2
         n = n ** 2
-
     for i in range(len(arr)):
         res *= arr[i]
     return res
