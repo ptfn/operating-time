@@ -3,7 +3,6 @@ import hashlib
 chars = "abcdefghijklmnopqrstuvwxyz"
 chars_len = len(chars)
 
-
 def reduce(i):
     pwd = ""
 

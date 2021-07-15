@@ -1,9 +1,9 @@
-from sys import argv
+
 import hashlib
 import base64
 
-string = argv[1]
-lenght = 16
+string = "123"
+lenght = 20
 
 hash = hashlib.sha256(str(string).encode("ascii")).hexdigest()
 encbyte = base64.b64encode(hash.encode("utf-8"))
