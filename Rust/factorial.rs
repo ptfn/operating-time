@@ -5,9 +5,7 @@ fn main() {
 }
 
 fn fac(n: i32) -> i32 {
-    if n <= 0 {
-        1
-    } else {
+    if n > 0 {
         n * fac(n - 1)
-    }
+    } else {1}
 }
