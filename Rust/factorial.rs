@@ -1,5 +1,7 @@
 fn main() {
-    println!("{}", fac(10));
+    let num = 20;
+    let fac_num = fac(num);
+    println!("Factorial {} -> {}", num, fac_num);
 }
 
 fn fac(n: i32) -> i32 {
