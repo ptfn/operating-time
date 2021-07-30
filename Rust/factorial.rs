@@ -4,7 +4,7 @@ fn main() {
     println!("Factorial {} -> {}", num, fac_num);
 }
 
-fn fac(n: i32) -> i32 {
+fn fac(n: u64) -> u64 {
     if n > 0 {
         n * fac(n - 1)
     } else {1}
