@@ -1,5 +1,13 @@
+struct User {
+    user: String,
+    password: String,
+}
+
 fn main() {
-    let num: (i32,f32,u8) = (4000, 3.14, 255);
-    let (x,y,z) = num;
-    println!("{} {} {}",x, y, z);
+    let user1 = User {
+        user: String::from("test"),
+        password: String::from("123"),
+    };
+
+    println!("{}\n{}", user1.user, user1.password);
 }
