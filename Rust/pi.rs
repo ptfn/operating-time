@@ -15,6 +15,6 @@ fn pi(mut n: u128) -> f64 {
 }
 
 fn main() {
-    let pi = pi(1000000);
+    let pi = pi(9999999);
     println!("Pi -> {}", pi);
 }
