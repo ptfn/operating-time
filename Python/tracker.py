@@ -5,7 +5,6 @@ import time
 coin = "xmr"
 wallet = "usd"
 money = 200
-time = 10
 
 
 def pers(last, new):
@@ -17,4 +16,4 @@ while True:
     data = r.json()
     price = data['ask']
     print("{} %".format(pers(float(money), float(price))))
-    time.sleep(tiem)
+    time.sleep(10)

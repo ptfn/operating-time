@@ -1,17 +1,17 @@
-fn col(mut n: i128) {
+fn col(mut n: i128) -> bool {
     loop {
         if n <= 1 {
-            break;
+            break false;
         } else if n % 2 == 0 {
             n = n / 2;
         } else if n % 2 != 0 {
             n = 3 * n + 1;
         } else {
-            break;
+            break false;
         }
     }
 }
 
 fn main() {
-    col(9876543211234)
+    println!("{}", col(27));
 }
