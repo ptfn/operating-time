@@ -1,15 +1,10 @@
-arr = ['1', '2', '3']
-strn = []
-res = []
+def brut_list(arr):
+    res = []
+    # str = ''
+    for i in range(len(arr)):
+        for k in range(len(arr)):
+            res.append(arr[k])
+    return res
 
-for i in range(len(arr)):
-    res.append(arr[i])
-    strn = []
-    strn.append(arr[i])
-    for n in range(len(arr)):
-        if arr[i] != arr[n]:
-            if arr[n] not in strn:
-                strn.append(arr[n])
-    res.append(strn)
-
-print(res)
+arr = ['1','2','3']
+print(brut_list(arr))
