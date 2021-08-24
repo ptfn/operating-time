@@ -2,7 +2,7 @@ def even(n):
     arr = []
     arr2 = []
     res = 0
-    # str = ""
+
     for i in range(1, n+1):
         arr.append(i)
 
@@ -14,7 +14,6 @@ def even(n):
 
     for i in range(len(arr)):
         if arr[i] != 0:
-            # str += "{} ".format(2*arr[i]+1)
             arr2.append(2*arr[i]+1)
 
     return arr2
