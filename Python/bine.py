@@ -6,4 +6,4 @@ def fib(n):
     return round(res, 0)
 
 if __name__ == '__main__':
-    print(fib(100))
+    print(fib(10))

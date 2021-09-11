@@ -13,4 +13,4 @@ def pow(n, m):
     return res
 
 if __name__ == '__main__':
-    print(pow(102, 100))
+    print(pow(2, 256))
