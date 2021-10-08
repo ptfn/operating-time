@@ -10,15 +10,27 @@ prod p q = p * q
 elier :: (Integral a) => a -> a -> a
 elier p q = (p - 1) * (q - 1)
 
--- dres :: Int -> Int -> Int -> Bool
--- dres e el n = if (mod (e * n) el) == 1 then n  
+dres :: (Integral a) => a -> a -> a -> a
+dres e el n
+    | (mod (e*n) el) == 1 = n 
+    | el <= n = 0
+    | otherwise = dres e el (n+1)
 
-p = 3557 --findPrime 100^10
-q = 2579 --findPrime 100^11
-e = 3 --indPrime 100^1
+enc :: (Integral a) => a -> a -> a -> a
+enc m e n = mod(m^e) n
+
+dec :: (Integral a) => a -> a -> a -> a
+dec c d n = mod(c^d) n
+
+
+p = findPrime 1100
+q = findPrime 999
 n = prod p q
 el = elier p q
-
+e = findPrime 11
+d = dres e el 0
 
 main :: IO()
-main = print(el)
+main = do
+    print(d)
+
