@@ -23,14 +23,16 @@ dec :: (Integral a) => a -> a -> a -> a
 dec c d n = mod(c^d) n
 
 
-p = findPrime 1100
-q = findPrime 999
+p = findPrime 100^501
+q = findPrime 100^488
 n = prod p q
 el = elier p q
-e = findPrime 11
-d = dres e el 0
+e = findPrime 2^16
+-- d = dres e el 0
 
 main :: IO()
 main = do
-    print(d)
+    print(p)
+    print(q)
+    print(e)
 

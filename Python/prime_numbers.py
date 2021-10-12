@@ -1,9 +1,11 @@
-import time
+from time import sleep
+from random import randrange
 
-n = 1650
+n = randrange(10,10000)
+lim = int((n-1)/2)
 arr = []
 
-for i in range(1, n+1):
+for i in range(1, lim):
     arr.append(i)
 
 for i in range(1, len(arr)):
@@ -13,12 +15,6 @@ for i in range(1, len(arr)):
             arr[res-1] = 0
 
 for i in range(len(arr)):
-    if (2*arr[i]+1) == 1033:
-        print(2*arr[i]+1)
-        time.sleep(2)
-    elif (2*arr[i]+1) == 3301:
-        print(2*arr[i]+1)
-        time.sleep(2)
-    elif arr[i] != 0:
-        print(2*arr[i]+1)
-        time.sleep(0.05)
+    if arr [i] != 0:
+        print("{}".format(2*arr[i]+1))
+        sleep(0.05)
