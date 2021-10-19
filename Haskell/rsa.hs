@@ -28,7 +28,7 @@ q = findPrime 100^488
 n = prod p q
 el = elier p q
 e = findPrime 2^16
--- d = dres e el 0
+d = dres e el 0
 
 main :: IO()
 main = do

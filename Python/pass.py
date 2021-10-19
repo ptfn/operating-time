@@ -1,4 +1,3 @@
-
 import hashlib
 import base64
 
@@ -10,3 +9,4 @@ encbyte = base64.b64encode(hash.encode("utf-8"))
 encstr = str(encbyte, "utf-8")
 
 print("Password -> {}".format(encstr[:lenght]))
+

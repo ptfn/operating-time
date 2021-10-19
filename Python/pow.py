@@ -12,5 +12,6 @@ def pow(n, m):
         res *= arr[i]
     return res
 
-if __name__ == '__main__':
-    print(pow(2, 256))
+# if __name__ == '__main__':
+#     print(pow(2,3))
+
