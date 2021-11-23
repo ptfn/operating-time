@@ -1,20 +1,23 @@
 from PIL import Image
 
-#Сохранения
-try:
-    img = Image.open("punk.png")
-    bg = Image.open("bg.png")
-except FileNotFoundError:
-    print("Файл не найден!")
+def image(num):
+    rare = [3442, 910, 846, 794, 377, 373, 300, 224, 220, 81, 57]
+    try:
+        bg = Image.open("img/bg.png")
+        if num in rare:
+            fg = Image.open("img/crypto/punk{}.png".format(num))
+        else:
+            fg = Image.open("img/punk{}.png".format(num))
+    except FileNotFoundError:
+        print("Файл не найден!")
 
-# Параметры
-size = (500, 500)
-saved = "save.png"
+    size = (500, 500)
+    saved = "save.png"
 
-# Изменения размера
-img_rsz = img.resize(size)
-bg_rsz = bg.resize(size)
+    fgr = fg.resize(size).convert("RGBA")
+    bgr = bg.resize(size).convert("RGB")
 
-# Сохранение и показ
-bg_rsz.paste(img_rsz, None, img_rsz)
-bg_rsz.save(saved)
+    bgr.paste(fgr, None, fgr)
+    bgr.save(saved)
+
+image(0)
