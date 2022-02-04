@@ -8,7 +8,7 @@ def swap():
     scramble['text'] = get_scramble()
 
 def get_scramble():
-    scramble_length = random.randint(20, 25)
+    scramble_length = random.randint(20, 23)
     moves = ["R", "R'", "R2", "L", "L'", "L2", "U", "U'", "U2", "D", "D'", "D2", "F", "F'", "F2", "B", "B'", "B2"]
     scramble = ""
     for i in range(0, scramble_length):
@@ -26,16 +26,25 @@ def format(t):
     sec = (t - milliseconds) / 10
     minutes = int(sec // 60)
     seconds = int(sec % 60)
-    return str(minutes) + ':' + str(seconds) + ':' +str(milliseconds)
+    if seconds >=10:
+        if minutes >= 10:
+            return str(minutes) + ':' + str(seconds) + ':0' +str(milliseconds)
+        else:
+            return '0' + str(minutes) + ':' + str(seconds) + ':0' +str(milliseconds)
+    else:
+        if minutes >= 10:
+            return str(minutes) + ':0' + str(seconds) + ':0' +str(milliseconds)
+        else:
+            return '0' + str(minutes) + ':0' + str(seconds) + ':0' +str(milliseconds)
 
 def loop(n):
-        label['text'] = str(format(n))
-        root.after(100, loop, n+1)
+    label['text'] = str(format(n))
+    root.after(100, loop, n+1)
 
 root = tkinter.Tk()
     
 label = tkinter.Label(font=(None, 100))
-label['text'] = '0:0:0'
+label['text'] = '00:00:00'
 label.pack()
 
 scramble = tkinter.Label(font=(None, 30))
