@@ -2,6 +2,7 @@ from random import randint
 from math import sqrt
 
 print("X\tY\tZ\tW")
+
 while 1:
     x = randint(1,100)
     y = randint(1,100)

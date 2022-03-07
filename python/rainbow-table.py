@@ -2,10 +2,9 @@ import hashlib
 
 chars = "0123456789"
 chars_len = len(chars)
-pass_len = 6
-chain_len = 1000
-chain_num = 100000
-
+pass_len = 8
+chain_len = 10
+chain_num = 1000000
 
 def reduce(i):
     pwd = ""
