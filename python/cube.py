@@ -1,5 +1,4 @@
 from random import randint
-from math import sqrt
 
 print("X\tY\tZ\tW")
 
