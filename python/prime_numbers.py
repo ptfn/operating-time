@@ -1,4 +1,4 @@
-arr = [i for i in range(0, 50)]
+arr = [i for i in range(0, 1000)]
 
 for i in range(1, len(arr)):
     for j in range(1, len(arr)):
