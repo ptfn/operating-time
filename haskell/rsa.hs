@@ -23,8 +23,8 @@ dec :: (Integral a) => a -> a -> a -> a
 dec c d n = mod(c^d) n
 
 
-p = findPrime 100^501
-q = findPrime 100^488
+p = findPrime 2^512
+q = findPrime 2^512
 n = prod p q
 el = elier p q
 e = findPrime 2^16

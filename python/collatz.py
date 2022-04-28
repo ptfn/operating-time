@@ -27,4 +27,4 @@ while True:
         break
     sleep(0.05)
 
-print("\nNum:{}\nIter:{}\nMax:{}".format(sn, iters, max(arr)))
+print("---------------\nNum:{}\nIter:{}\nMax:{}".format(sn, iters, max(arr)))
