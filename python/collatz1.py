@@ -1,35 +1,30 @@
 from sys import argv
-from time import sleep
 
-n = int(argv[1])
-arr = []
+def collatz(n):
+    arr = []
 
-for i in range(1,n):
     while True:
-        if i == 1:
-            break
-
-        elif i % 2 == 0:
-            if i not in arr:
-                arr.append(int(i))
-            else:
-                break
-            i = i / 2
-
-        elif i % 2 != 0:
-            if i not in arr:
-                arr.append(int(i))
-            else:
-                break
-            i = 3 * i + 1
-
-
+        if n not in arr:
+                arr.append(int(n))
         else:
             break
-    
-        sleep(0.001)
 
-arr.sort()
+        if n == 1:
+            break
 
-print(f"{n} -> {len(arr)}")
-print(f"{arr}")
+        elif n % 2 == 0:
+            n = n / 2
+
+        elif n % 2 != 0:
+            n = 3 * n + 1
+
+    return arr
+
+def main():
+    n = int(argv[1])
+    arr = collatz(n)
+    print(f"{n} -> {len(arr)}")
+    print(sorted(arr))
+
+if __name__ == '__main__':
+    main()

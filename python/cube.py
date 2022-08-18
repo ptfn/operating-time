@@ -10,5 +10,6 @@ while 1:
 
     xyz = (x**3)+(y**3)+(z**3)
     wn = w ** 3
+    
     if xyz == wn:
-        print("{}\t{}\t{}\t{}".format(x, y, z, w))
+        print(f"{x}\t{y}\t{z}\t{w}")
