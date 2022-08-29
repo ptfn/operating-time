@@ -7,9 +7,9 @@ for i in range(1, len(arr)):
             arr[res-1] = 0
 
 for i in range(len(arr)):
-    if i +1 == len(arr) and arr[i] != 0:
+    if i + 1 == len(arr) and arr[i] != 0:
         print("{} \n".format(2*arr[i]+1), end="")
     elif i + 1 == len(arr):
         print("\n")
-    elif arr [i] != 0:
+    elif arr[i] != 0:
         print("{} \t".format(2*arr[i]+1), end="")

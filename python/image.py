@@ -1,5 +1,6 @@
 from PIL import Image
 
+
 def image(num):
     rare = [3442, 910, 846, 794, 377, 373, 300, 224, 220, 81, 57]
     try:
@@ -19,5 +20,6 @@ def image(num):
 
     bgr.paste(fgr, None, fgr)
     bgr.save(saved)
+
 
 image(0)

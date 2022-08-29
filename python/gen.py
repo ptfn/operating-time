@@ -3,6 +3,7 @@ import hashlib
 
 chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?@#$%^&*=<>()[]/|,.+-_"
 
+
 def gen_token(length):
     password = ""
     key = ""
@@ -12,9 +13,11 @@ def gen_token(length):
     password = hashlib.sha1(str(password).encode("ascii")).hexdigest()
     return password
 
+
 def main():
     token = gen_token(256)
-    print(token) 
+    print(token)
+
 
 if __name__ == "__main__":
     main()

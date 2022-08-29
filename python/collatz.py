@@ -5,7 +5,7 @@ n = int(argv[1])
 arr = [n]
 iters = 0
 
-while True: 
+while True:
     if n == 1:
         iters += 1
         break

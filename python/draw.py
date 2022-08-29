@@ -6,6 +6,7 @@ old_user = []
 win_user = []
 all_user = []
 
+
 def limition (arr):
     len_arr = len(arr)
 
@@ -19,7 +20,8 @@ def limition (arr):
     limit = math.floor((len_arr / 100) * k)
     return limit
 
-def draw (arr):
+
+def draw(arr):
     limit = limition(arr)
                                 # <== Условие для рандома
     for i in range(0,limit):
@@ -28,7 +30,8 @@ def draw (arr):
         arr.remove(winner)
         print(winner)
 
-def draw_new_or_old (arr_new, arr_old):
+
+def draw_new_or_old(arr_new, arr_old):
     limit_new = limition(arr_new)
     limit_old = limition(arr_old)
     limit = limit_new + limit_old
@@ -46,6 +49,7 @@ def draw_new_or_old (arr_new, arr_old):
         win_user.append(winner)
         arr_old.remove(winner)
         print(winner)
+
 
 while True:
     choice = int(input('Draw(1)/Add User(2)/Del Use(3)/Exit(4)/Mas(5):'))

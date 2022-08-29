@@ -1,4 +1,5 @@
 import fractions
+
 def compute():
     ans = 1
     for i in range(1, 21):
@@ -6,6 +7,3 @@ def compute():
     return str(ans)
 
 print(compute())
-
-
-

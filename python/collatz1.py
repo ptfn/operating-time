@@ -1,11 +1,12 @@
 from sys import argv
 
+
 def collatz(n):
     arr = []
 
     while True:
         if n not in arr:
-                arr.append(int(n))
+            arr.append(int(n))
         else:
             break
 
@@ -20,11 +21,13 @@ def collatz(n):
 
     return arr
 
+
 def main():
     n = int(argv[1])
     arr = collatz(n)
     print(f"{n} -> {len(arr)}")
     print(sorted(arr))
+
 
 if __name__ == '__main__':
     main()

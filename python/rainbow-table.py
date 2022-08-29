@@ -6,13 +6,15 @@ pass_len = 8
 chain_len = 10
 chain_num = 1000000
 
+
 def reduce(i):
     pwd = ""
 
     while len(pwd) < pass_len:
-        pwd = pwd + chars[ i % chars_len ]
+        pwd = pwd + chars[i % chars_len]
         i = i // chars_len
     return pwd
+
 
 file = open("table.txt", 'a+', encoding='utf-8')
 

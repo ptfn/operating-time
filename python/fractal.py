@@ -19,9 +19,10 @@ for n in range(num):
     else:
         x = -0.15*X[n-1] + 0.28*Y[n-1]
         y = 0.26*X[n-1] + 0.24*Y[n-1] + 0.44
-    X.append(x);Y.append(y)
+    X.append(x)
+    Y.append(y)
 
 '''Make a plot'''
-plt.figure(figsize = [15,15])
-plt.scatter(X,Y,color = 'g',marker = '.')
+plt.figure(figsize=[15, 15])
+plt.scatter(X, Y, color='g', marker='.')
 plt.show()
