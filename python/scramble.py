@@ -54,7 +54,7 @@ scramble.pack()
 button = tkinter.Button(root, text="SWAP", command=swap)
 button.pack()
 
-button2 = tkinter.Button(root, text="START", command=start) 
+button2 = tkinter.Button(root, text="START", command=start)
 button2.pack()
 
 root.mainloop()
