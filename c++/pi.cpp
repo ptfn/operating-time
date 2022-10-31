@@ -13,13 +13,13 @@ long int fac(int n) {
     return res;
 }
 
-// long double pi(unsigned int n) {
-//     long double res = 0;
-//     for (int i = 0; i <= n; i++) {
-//         res += pow(-1, i) / (2 * i + 1);
-//     }
-//     return res * 4;
-// }
+long double pi(unsigned int n) {
+    long double res = 0;
+    for (int i = 0; i <= n; i++) {
+        res += pow(-1, i) / (2 * i + 1);
+    }
+    return res * 4;
+}
 
 long double pi2(unsigned int n) {
     long double res = 0;
@@ -33,7 +33,7 @@ long double pi2(unsigned int n) {
 int main() {
     unsigned int n;
     std::cin >> n;
-    // std::cout << pi(n) << "\n";
-    std::cout << pi2(n) << "\n";
+    std::cout << pi(n) << "\n";
+    // std::cout << pi2(n) << "\n";
     return 0;
 }

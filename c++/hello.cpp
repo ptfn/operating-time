@@ -4,6 +4,6 @@ int main() {
    using namespace std;
    int num;
    cin >> num;
-   cout << "Number:" << num << "\n";
+   cout << "Number:\a" << num << "\n";
    return 0;
 }

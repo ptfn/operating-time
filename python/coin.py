@@ -4,7 +4,9 @@ import requests
 
 def crypto_alert(wallet, coin):
     try:
-        r = requests.get('https://api.bitfinex.com/v1/pubticker/' + coin + wallet)
+        r = requests.get(
+                    f"https://api.bitfinex.com/v1/pubticker/{coin}{wallet}"
+                )
         data = r.json()
         price = data['ask']
         return f"{round(float(price), 2)}"
