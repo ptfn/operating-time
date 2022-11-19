@@ -3,7 +3,7 @@ from math import *
 
 
 def fun(n):
-    return cos(2*pi*n)
+    return cos(n)*cos(n)*cos(n)
 
 
 def main():

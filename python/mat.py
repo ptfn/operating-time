@@ -10,7 +10,8 @@ def gen_num(number, n):
 
 def main():
     n = int(sys.argv[1])
-    dictionary = {str(x+1): 0 for x in range(6)}
+    m = int(sys.argv[2])
+    dictionary = {str(x+1): 0 for x in range(m)}
     gen_num(dictionary, n)
     print("Число\tЧастота")
     for i in range(1, len(dictionary)+1):

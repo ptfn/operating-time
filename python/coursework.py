@@ -91,16 +91,16 @@ class Function(QWidget):
         for i in range(len(data)):
             if i == 0:
                 arr_str = '{} {} {}'.format(
-                    data[i][0].ljust(18),
-                    data[i][1].ljust(15),
+                    data[i][0].ljust(22),
+                    data[i][1].ljust(18),
                     data[i][2].ljust(10))
                 label_3.setText('{}\n'.format(arr_str))
 
             else:
                 arr_str = '{} {} {}'.format(
-                    data[i][0].ljust(12),
-                    data[i][1].ljust(16),
-                    data[i][2].ljust(20))
+                    data[i][0].ljust(20),
+                    data[i][1].ljust(22),
+                    data[i][2].ljust(10))
                 list_1.addItem('{}\n'.format(arr_str))
 
     def sum_data(self, label_5, data):
@@ -111,6 +111,12 @@ class Function(QWidget):
 
         label_5.setText(f"{sumn}")
 
+    # def delitem(self, list_1):
+    #     selected_row = list_1.currentRow()
+    #     item = list_1.takeItem(selected_row)
+    #     self.data.pop(selected_row)
+    #     del item
+
     def notify(self, date):
         notify2.init("Input Data")
         n = notify2.Notification('You didn`t keep a date for the minutes')
@@ -119,7 +125,8 @@ class Function(QWidget):
 
         while True:
             try:
-                if self.last_input_data(self.get_date(), date[len(date)-1][0]):
+                if self.last_input_data(self.get_date(),
+                                        date[len(date)-1][0]):
                     n.show()
                     break
 
@@ -133,20 +140,21 @@ class Window(QWidget):
         super(Window, self).__init__(parent)
         self.func = Function()
         # Windows
-        self.resize(640, 480)
+        self.resize(960, 540)
         self.setWindowTitle('Data Input')
 
         # Label
         self.label = QLabel(self)
-        self.label.setGeometry(QRect(20, 30, 140, 41))
+        self.label.setGeometry(QRect(700, 30, 140, 41))
         font = QFont()
+        font.setBold(True)
         font.setPointSize(18)
         self.label.setFont(font)
         self.label.setObjectName('label')
 
         # Label2
         self.label_2 = QLabel(self)
-        self.label_2.setGeometry(QRect(150, 30, 281, 41))
+        self.label_2.setGeometry(QRect(700, 80, 281, 41))
         font = QFont()
         font.setPointSize(18)
         self.label_2.setFont(font)
@@ -154,23 +162,25 @@ class Window(QWidget):
 
         # Label3
         self.label_3 = QLabel(self)
-        self.label_3.setGeometry(QRect(20, 100, 500, 50))
+        self.label_3.setGeometry(QRect(20, 20, 700, 50))
         font = QFont()
+        font.setBold(True)
         font.setPointSize(18)
         self.label_3.setFont(font)
         self.label_3.setObjectName('label_3')
 
         # Label4
         self.label_4 = QLabel(self)
-        self.label_4.setGeometry(QRect(315, 30, 281, 41))
+        self.label_4.setGeometry(QRect(700, 130, 281, 41))
         font = QFont()
+        font.setBold(True)
         font.setPointSize(18)
         self.label_4.setFont(font)
         self.label_4.setObjectName('label_4')
 
         # Label5
         self.label_5 = QLabel(self)
-        self.label_5.setGeometry(QRect(380, 30, 281, 41))
+        self.label_5.setGeometry(QRect(700, 180, 281, 41))
         font = QFont()
         font.setPointSize(18)
         self.label_5.setFont(font)
@@ -178,7 +188,7 @@ class Window(QWidget):
 
         # List
         self.list_1 = QListWidget(self)
-        self.list_1.setGeometry(QRect(20, 150, 600, 320))
+        self.list_1.setGeometry(QRect(20, 80, 650, 440))
         font = QFont()
         font.setPointSize(18)
         self.list_1.setFont(font)
@@ -190,24 +200,30 @@ class Window(QWidget):
         self.label_4.setText('Sum: ')
         self.label_5.setText('No')
 
-        # Button
-        self.button_1 = QPushButton('Input Data', self)
-        self.button_1.move(540, 110)
-        self.button_1.resize(80, 25)
+        # Button 1
+        self.button_1 = QPushButton('Input', self)
+        self.button_1.move(680, 480)
+        self.button_1.resize(130, 40)
         self.button_1.clicked.connect(
-            lambda: self.func.input_data(
-                                        self.file_1[0],
-                                        self.label_2,
-                                        self.label_3,
-                                        self.list_1))
+            lambda: self.func.input_data(self.file_1[0],
+                                         self.label_2,
+                                         self.label_3,
+                                         self.list_1))
 
-        # Button
+        # Button 2
         self.button_2 = QPushButton('Sum', self)
-        self.button_2.move(540, 80)
-        self.button_2.resize(80, 25)
+        self.button_2.move(820, 480)
+        self.button_2.resize(130, 40)
         self.button_2.clicked.connect(
             lambda: self.func.sum_data(self.label_5,
                                        self.func.data))
+
+        # # Button 3
+        # self.button_3 = QPushButton('Remove Item', self)
+        # self.button_3.move(680, 430)
+        # self.button_3.resize(270, 40)
+        # self.button_3.clicked.connect(
+        #     lambda: self.func.delitem(self.list_1))
 
     def graphics(self):
         # File Window

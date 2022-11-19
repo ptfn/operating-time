@@ -10,4 +10,4 @@ pise n p num den oper
 
 main :: IO()
 main = do
-    print(pise 1000000 p num den oper)
+    print(pise 10000000 p num den oper)

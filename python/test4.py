@@ -1,6 +1,0 @@
-hsh = "30207a262344a1a91f04f7635e8c0870b9fce825093a0f9b3a42be84658a8fc2d428ef6d45ef3911b3d9db43425935fc25728eb7853f6ac74a2e74919c9a3105"
-
-for i in range(len(hsh)-2):
-     
-
-print(hsh)

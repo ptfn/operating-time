@@ -1,10 +1,11 @@
-numStud = 202368
-kol = 60
+numStud = 202331
+j = 1
 
 num = numStud % 10
-print('вариант:', num)
-print('номер заданий')
+print('Вариант:', num)
+print('Номер\tЗадание')
 
-for i in range(kol-9):
+for i in range(0, (104-9)):
     if(i % 5 == 0):
-        print(i+num)
+        print(f"{j}\t{num + i}")
+        j += 1
