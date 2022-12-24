@@ -28,7 +28,7 @@ if len(string2) != 0:
 j = 0
 arr3 = list(string2)
 
-for i in range(1,len(arr3)+1):
+for i in range(1, len(arr3)+1):
     if i % 2 == 0:
         arr3[i-1] = arr3[i-1] + ' '
 

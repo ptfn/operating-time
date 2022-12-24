@@ -5,7 +5,7 @@ num = numStud % 10
 print('Вариант:', num)
 print('Номер\tЗадание')
 
-for i in range(0, (104-9)):
+for i in range(0, (60-9)):
     if(i % 5 == 0):
         print(f"{j}\t{num + i}")
         j += 1

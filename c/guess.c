@@ -72,8 +72,11 @@ int main()
         if (binsearch(arr, level, in) != -1) {
             printf("YOU WIN!\n");
             break;
-        } else {
+        } 
+        
+        else {
             printf("No NUMBER!\n");
         }
     }
+    return 0;
 }

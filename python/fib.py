@@ -5,8 +5,15 @@ def fib(n):
         return (fib(n-1) + fib(n-2))
 
 
+def fib2(n):
+    a, b = 0, 1
+    for i in range(n-1):
+        a, b = b, a + b
+    return b
+
+
 def main():
-    print(fib(10))
+    print(fib2(10))
 
 
 if __name__ == '__main__':

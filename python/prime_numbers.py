@@ -1,8 +1,9 @@
-arr = [i for i in range(0, 1000)]
+arr = [i for i in range(0, 10)]
 
 for i in range(1, len(arr)):
     for j in range(1, len(arr)):
         res = i+j+2*i*j
+        print(res)
         if res <= len(arr):
             arr[res-1] = 0
 

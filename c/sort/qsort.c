@@ -1,0 +1,29 @@
+#include <string.h>
+
+/* qsort: сортировка v[left] ... v[right] в порядке возрастания */
+void qsort(char *v[], int left, int right)
+{
+    int i, last;
+    void swap(char *v[], int i, int j);
+
+    if (left >= right)  /* ничего не делать, если в массиве */
+        return;         /* меньше двух элеметов */
+    swap(v, left, (left+right)/2);
+    last = left;
+    for (i = left+1; i <= right; i++)
+        if (strcmp(v[i], v[left]) < 0)
+            swap(v, ++last, i);
+    swap(v, left, last);
+    qsort(v, left, last-1);
+    qsort(v, last+1, right);
+}
+
+/* swap: обмен местами v[i] и v[j] */
+void swap(char *v[], int i, int j)
+{
+    char *temp;
+
+    temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
+}

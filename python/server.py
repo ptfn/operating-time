@@ -13,18 +13,21 @@ conn.send("Чтобы тебя проверить ответить на 3 воп
 
 while True:
     win = 0
-    
+
     conn.send("1) Лучшая операционная система:\n".encode("utf8"))
     data = conn.recv(1024).decode("utf8")
-    if data == "GNU/Linux\n" or data == "Linux\n" or data == "linux\n" or data == "gnu/linux\n": win += 1
+    if data == "GNU/Linux\n" or data == "Linux\n" or data == "linux\n" or data == "gnu/linux\n":
+        win += 1
 
     conn.send("2) Лучший язык программирования:\n".encode("utf8"))
     data = conn.recv(1024).decode("utf8")
-    if data == "Rust\n" or data == "rust\n":  win += 1
-    
+    if data == "Rust\n" or data == "rust\n":
+        win += 1
+
     conn.send("3) Самая лучшая криптовалюта:\n".encode("utf8"))
     data = conn.recv(1024).decode("utf8")
-    if data == "Monero\n" or data == "monero\n":  win += 1
+    if data == "Monero\n" or data == "monero\n":
+        win += 1
 
     if win == 3:
         conn.send(f"\nОчень хорошо это ты. Вот держи ключ и ссылку.\nСсылка: {link}\nКлюч: {key}\n".encode("utf8"))

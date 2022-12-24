@@ -1,7 +1,6 @@
 from PIL import Image, ImageColor
 from PIL import ImageDraw
 import random
-import sys
 
 
 class Point():
@@ -14,34 +13,31 @@ class Point():
         draw.point((self.x, self.y), fill=ImageColor.getrgb(self.color))
 
 
-class Triangle():
-    def __init__(self, num: int):
-        self.num = num
+class Noise():
+    def __init__(self):
         self.width = 256
         self.height = 256
-        self.colors = ["red", "blue", "green"]
         self.image = Image.new("RGB", (self.width, self.height))
         self.draw = ImageDraw.Draw(self.image)
 
     def rendering(self):
-        p = Point(random.randint(0, self.height),
-                  random.randint(0, self.width),
-                  "blue")
-        i = 0
+        p = Point(1, 1, "white")
 
-        while i < self.num:
-            p.paint(self.draw)
-            p.x = random.randint(0, self.height)
-            p.y = random.randint(0, self.width)
-            p.color = random.choice(self.colors)
-
-            i += 1
+        for x in range(self.width):
+            for y in range(self.height):
+                p.x, p.y = x, y
+                if x&y:
+                    p.color = "white"
+                    p.paint(self.draw)
+                else:
+                    p.color = "black"
+                    p.paint(self.draw)
 
         self.image.save("save.png", "PNG")
 
 
 def main():
-    start = Triangle(int(sys.argv[1]))
+    start = Noise()
     start.rendering()
 
 
