@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <math.h>
 
-/* Быстрый поиск делителей у числа */
+/* Быстрый поиск делителей числа */
 uint32_t divider(uint64_t number)
 {
     uint32_t result = 0;
@@ -12,4 +12,17 @@ uint32_t divider(uint64_t number)
     if (sqrt(number) == (int)sqrt(number)) 
         return 2 * result - 1;
     return 2 * result; 
+}
+
+/* Быстрый подсчёт всех делителей числа */
+uint32_t exc_div(uint16_t number)
+{
+    uint32_t result = 1;
+    for (uint16_t i = 2; i <= sqrt(number); i++)
+        if (number % i == 0)
+            if (i != sqrt(number))
+                result += i + (number / i); 
+            else
+                result += i;
+    return result;
 }

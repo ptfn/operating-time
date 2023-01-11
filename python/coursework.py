@@ -37,7 +37,7 @@ class Function(QWidget):
             date, num = self.inputdialog()
 
         except Exception:
-            date, num = '00.00.00', 0
+            date, num = '01.01.01', 0
 
         finally:
             self.csvwriter.writerows([[self.get_date(), date, str(num)]])
@@ -60,6 +60,7 @@ class Function(QWidget):
         today = datetime.datetime.now()
         return today.strftime('%X')
 
+    # HERE
     def inputdialog(self):
         date, done1 = QInputDialog.getText(self, 'Input Date',
                                            'Enter the date (11.11.11):')
@@ -73,6 +74,7 @@ class Function(QWidget):
             else:
                 return self.date_gen(date), num
 
+    # HERE
     def date_gen(self, date):
         leng = 8 - len(date)
         for i in range(leng):

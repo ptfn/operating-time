@@ -63,6 +63,6 @@ def day(n):
 
 
 if __name__ == "__main__":
-    s = input()
+    s = "11/11/2222"
     d, m, y = input_year(s)
     day(number_days(d, m, y))
