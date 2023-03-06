@@ -1,7 +1,8 @@
 import math
+import sys
 
 
-def pow(n, m):
+def pow(n: int, m: int) -> int:
     arr = []
     res = 1
 
@@ -18,5 +19,12 @@ def pow(n, m):
     return math.prod(arr)
 
 
+def main():
+    a = int(sys.argv[1])
+    b = int(sys.argv[2])
+    print(pow(a, b))
+    
+
 if __name__ == '__main__':
-    print(pow(36200, 323))
+    main()
+

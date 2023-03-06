@@ -17,9 +17,10 @@ int main(int argc, char * argv[]) {
     else if (((p >= a) && (s >= c)) || ((p >= c) && (s >= a))) {enter = true;}
     else {enter = false;}
 
-    if (enter) {printf("Yes\n");} 
-    else {printf("No\n");}
+    if (enter)
+        printf("Yes\n");
+    else
+        printf("No\n");
 
-    getchar();
     return 0;
 }

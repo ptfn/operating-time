@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-#define N 40000000
+#define N 5000000
 
 int main(){    
     bool arr[N+1];

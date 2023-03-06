@@ -9,6 +9,6 @@ int main(int argc, char * argv[])
         sum += atof(argv[i]);
 
 
-    printf("%.1f\n", sum);
+    printf("%.1f\n%d\n", sum, argc);
     return 0;
 }
