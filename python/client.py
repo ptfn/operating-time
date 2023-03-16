@@ -13,7 +13,7 @@ def read_sock(sock):
 
 
 def main():
-    server = '127.0.0.1', 55553
+    server = '127.0.0.1', 55551
     sock.connect(server)
     sock.sendto(('Connect to server').encode('utf-8'), server)
 
