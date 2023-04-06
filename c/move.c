@@ -6,7 +6,7 @@
 
 #define MAX(a, b) (a > b ? a : b)
 #define DELAY 30000
-#define MOVE  20
+#define MOVE  15
 
 typedef struct {
     int x;
@@ -27,8 +27,9 @@ int main()
     getmaxyx(stdscr, m.y, m.x);
 
     move = MAX(m.x, m.y);
-    p2.x = m.x-1;
+    // p2.x = m.x-1;
     
+    /* First Generation New Point */
     while (1) {
         c.x = rand() % m.x+1;
         c.y = rand() % m.y+1;
@@ -40,7 +41,7 @@ int main()
         clear();
         printw("SCORE: %d\tMOVE: %d", score, move);
         // mvprintw(p1.y, p1.x, "o");
-        mvprintw(p2.y, p2.x, "m");
+        mvprintw(p2.y, p2.x, "o");
         mvprintw(c.y, c.x, "x");
         
         /* My Control */
@@ -67,6 +68,7 @@ int main()
                 p2.y--;
         }
 
+        /* Field Boundaries */
         if (p1.x < 0)
             p1.x++;
         else if (p1.x >= m.x)
@@ -77,7 +79,7 @@ int main()
         else if (p1.y >= m.y)
             p1.y--;
 
-
+        /* Generation New Point */
         if ((p1.x == c.x && p1.y == c.y) || (p2.x == c.x && p2.y == c.y)) {
             score++;
             // move += MOVE;
@@ -89,13 +91,15 @@ int main()
                     break;
             }
         }
+
+        /* Break Program */
         if (move > 0)
             move--;
         else {
             clear();
             mvprintw(m.y/2,(m.x-8)/2,"YOU LOSE");
             refresh();
-            sleep(1);
+            usleep(DELAY);
             break;refresh();
         }
         refresh();
