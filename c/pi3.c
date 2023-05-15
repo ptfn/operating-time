@@ -12,15 +12,18 @@ uint16_t F(uint16_t number, uint16_t i)
 
 int main()
 {
+    /* Init Variables */
     uint8_t result[N];
     uint16_t init[LEN];
     uint16_t num[LEN];
 
+    /* Init Array */
     for (uint64_t i = 0; i < LEN; i++) {
         num[i] = i > 0 ? (2*(i-1))+3 : 0;
         init[i] = 2;
     }
 
+    /* Main Calculations */
     for (uint64_t j = 0; j < N; j++) {
         uint16_t sum[LEN];
         uint16_t ren[LEN];
@@ -39,6 +42,7 @@ int main()
         init[0] = F(sum[0], 1);   // sum[0] / 10
     }
 
+    /* Out In Console */
     for (uint64_t i = 0; i < N; i++) {
         if (i % 10 == 0)
             printf("%d  ", result[i]);

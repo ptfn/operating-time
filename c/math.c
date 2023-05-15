@@ -26,3 +26,21 @@ uint32_t exc_div(uint16_t number)
                 result += i;
     return result;
 }
+
+/* НОД */
+uint32_t gcd(uint16_t a, uint16_t b)
+{
+    while (a != 0 && b != 0) {
+        if (a > b)
+            a = a % b;
+        else
+            b = b % a;
+    }
+    return a + b;
+}
+
+/* НОК */
+uint32_t lcm(uint16_t a, uint16_t b)
+{
+    return (a * b) / gcd(a, b);
+}

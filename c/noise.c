@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define DELAY 100000
+#define DELAY 15000
 #define FILL  1
 
 typedef struct {
@@ -20,18 +20,17 @@ int main()
     noecho();
     curs_set(FALSE);
 
-    getmaxyx(stdscr, max_y, max_x);
-
     while(1) {
         clear();
+        getmaxyx(stdscr, max_y, max_x);
         for (int i = 0; i < max_x/FILL; i++) {
-            mvprintw(p1.y, p1.x, "o");
+            char c = rand() % 256;
+            mvaddch(p1.y, p1.x, c);
             p1.x = rand() % max_x + 1;
             p1.y = rand() % max_y + 1;
         }
         refresh();
         usleep(DELAY);
     }
-
     endwin();
 }

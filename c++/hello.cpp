@@ -1,9 +1,7 @@
 #include <iostream>
 
-int main() {
-   using namespace std;
-   int num;
-   cin >> num;
-   cout << "Number:\a" << num << "\n";
-   return 0;
+int main(int argc, char** argv)
+{
+   std::cout << "Hello!" << argv[1] << std::endl;
+	return 0;
 }

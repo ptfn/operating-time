@@ -52,12 +52,28 @@ def dec(input_file, key, output_file):
 
 def main():
     parser = argparse.ArgumentParser(description='Encrypt Files')
-    parser.add_argument('-s', '--size', type=int, dest='size', required=False, help='size key')
-    parser.add_argument('-i', '--input', dest='input', help='data input')
-    parser.add_argument('-o', '--output', dest='output', help='data output')
-    parser.add_argument('-k', '--key', dest='key', help='key')
-    parser.add_argument('-e', '--encrypt', action='store_true', dest='encrypt', help='encrypt')
-    parser.add_argument('-d', '--decrypt', action='store_true', dest='decrypt', help='decrypt')
+    parser.add_argument('-s', '--size',
+                        type=int,
+                        dest='size',
+                        required=False,
+                        help='size key')
+    parser.add_argument('-i', '--input',
+                        dest='input',
+                        help='data input')
+    parser.add_argument('-o', '--output',
+                        dest='output',
+                        help='data output')
+    parser.add_argument('-k', '--key',
+                        dest='key',
+                        help='key')
+    parser.add_argument('-e', '--encrypt',
+                        action='store_true',
+                        dest='encrypt',
+                        help='encrypt')
+    parser.add_argument('-d', '--decrypt',
+                        action='store_true',
+                        dest='decrypt',
+                        help='decrypt')
 
     args = parser.parse_args()
     size = args.size

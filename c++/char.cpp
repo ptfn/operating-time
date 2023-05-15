@@ -1,12 +1,14 @@
 #include <iostream>
-#include <climits>
 
 int main() {
     using namespace std;
+    char ch;
+    int ci;
 
-    int char_bit = CHAR_BIT;
-    int char_max = CHAR_MAX;
-
-    cout << "BIT\t" << char_bit << endl;
-    cout << "MAX\t" << char_max << endl;
+    cout << "Enter a character: ";
+    cin >> ch;
+    ci = ch;
+    cout << "\nHello! " << "You enter: ";
+    cout.put(ch); 
+    cout << "\nASCII code: " << ci << endl;
 }

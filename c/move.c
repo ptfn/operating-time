@@ -24,6 +24,11 @@ int main()
     noecho();
     curs_set(FALSE);
 
+    int left, right, top, bottom, tlc, trc, blc, brc;
+    left = right = '|';
+    top = bottom = '-';
+    tlc = brc = trc = blc = '+';
+
     getmaxyx(stdscr, m.y, m.x);
 
     move = MAX(m.x, m.y);
@@ -39,6 +44,8 @@ int main()
 
     while(1) {
         clear();
+        getmaxyx(stdscr, m.y, m.x);
+        wborder(stdscr, left, right, top, bottom, tlc, trc, blc, brc);
         printw("SCORE: %d\tMOVE: %d", score, move);
         // mvprintw(p1.y, p1.x, "o");
         mvprintw(p2.y, p2.x, "o");
@@ -69,21 +76,21 @@ int main()
         }
 
         /* Field Boundaries */
-        if (p1.x < 0)
+        if (p1.x < 1)
             p1.x++;
-        else if (p1.x >= m.x)
+        else if (p1.x >= m.x-1)
             p1.x--;
         
-        if (p1.y < 1)
+        if (p1.y < 2)
             p1.y++;
-        else if (p1.y >= m.y)
+        else if (p1.y >= m.y-1)
             p1.y--;
 
         /* Generation New Point */
         if ((p1.x == c.x && p1.y == c.y) || (p2.x == c.x && p2.y == c.y)) {
             score++;
             // move += MOVE;
-            move += MOVE + (MAX(m.x, m.y) / 3);
+            move += MOVE + (MAX(m.x, m.y) / 5);
             while (1) {
                 c.x = rand() % m.x+1;
                 c.y = rand() % m.y+1;

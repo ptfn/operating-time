@@ -6,8 +6,8 @@ int square(int a);
 int main() {
     int a, b;
     std::cin >> a >> b;
-    std::cout << sum(a, b) << "\n";
-    std::cout << square(a) << "\n" << square(b) << "\n";
+    std::cout << sum(a, b) << std::endl;
+    std::cout << square(a) << std::endl << square(b) << std::endl;
     return 0;
 }
 
