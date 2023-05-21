@@ -1,11 +1,11 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
-#define N 4000000
+#define N 100
 
 int main(){
     bool arr[N+1];
-    uint64_t sum = 0;
+    uint64_t sum = 0, j = 0;
 
     for (uint64_t i = 0; i <= N; i++)
         arr[i] = true;
@@ -16,8 +16,10 @@ int main(){
                 arr[j] = false;
 
     for (uint64_t i = 2; i <= N; i++)
-        if (arr[i])
+        if (arr[i]) {
             sum += i;
+            j++;
+        }
 
-    printf("%ld\n", sum);
+    printf("%ld\n%ld\n", sum, j);
 }

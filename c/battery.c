@@ -34,7 +34,7 @@ int main()
             system("systemctl suspend");
         } else if (bperc > 20 && bperc <= 30) {
             printf(" %d%%", bperc);
-            system("brightnessctl set 25 > dev/null");
+            system("brightnessctl set 25 > /dev/null");
         } else if (bperc > 30 && bperc <= 65) {
             printf(" %d%%", bperc);
         } else if (bperc > 65 && bperc <= 85) {

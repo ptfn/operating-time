@@ -3,24 +3,25 @@
 #include <stdio.h>
 #include <math.h>
 
-#define N 97 
+#define N 89 
 #define MAX(a, b) (a > b ? a : b)
 
-bool mutually_prime(uint16_t a, uint16_t b)
+uint32_t gcd(uint16_t a, uint16_t b)
 {
-    for (uint16_t i = 2; i < MAX(a, b); i++) {
-        if (a % i == 0 && b % i == 0) {
-            return false;
-        }
+    while (a != 0 && b != 0) {
+        if (a > b)
+            a = a % b;
+        else
+            b = b % a;
     }
-    return true;
+    return a + b;
 }
 
 uint16_t euler_fi(uint16_t number)
 {
     uint16_t n = 0;
     for (uint16_t i = 1; i < number; i++) {
-        if (mutually_prime(number, i)) {
+        if (gcd(number, i) == 1) {
             n++;
         }
     } 

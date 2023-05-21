@@ -44,3 +44,16 @@ uint32_t lcm(uint16_t a, uint16_t b)
 {
     return (a * b) / gcd(a, b);
 }
+
+/* Вычисление Степени */
+uint64_t upow(uint64_t base, uint64_t exp)
+{
+    uint64_t result = 1;
+    while (exp) {
+        if (exp % 2)
+           result *= base;
+        exp /= 2;
+        base *= base;
+    }
+    return result;
+}
