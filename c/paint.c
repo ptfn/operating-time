@@ -1,6 +1,6 @@
 #include <ncurses.h>
 #include <stdbool.h>
-#include <stdint.h>u
+#include <stdint.h>
 
 // Add menu paint color and lines and background
 
