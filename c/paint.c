@@ -22,7 +22,7 @@ int main()
     curs_set(false);
     box(stdscr, 0, 0);
 
-    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
+    mousemask(BUTTON1_CLICKED | REPORT_MOUSE_POSITION, NULL);
     
     init_pair(1, COLOR_GREEN, COLOR_GREEN);
     init_pair(2, COLOR_BLACK, COLOR_BLACK);
@@ -42,7 +42,7 @@ int main()
         if (c == KEY_MOUSE) {
             MEVENT event;
             if (getmouse(&event) == OK) {
-                if (event.bstate && BUTTON2_PRESSED) {
+                if (event.bstate && BUTTON1_PRESSED) {
                     print_char(event.x, event.y, color);
                 }
             }
@@ -54,6 +54,7 @@ int main()
 
                 case 'c': case 'C':
                     clear();
+                    box(stdscr, 0, 0);
                     break;
 
                 case '1': case '2': case '3': case '4':
