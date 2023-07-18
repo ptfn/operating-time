@@ -1,14 +1,16 @@
-void strcpy(char *s, char *t)
+char* strcpy2(char *s, const char *t)
 {
-    int i;
-
-    i = 0;
-    while ((s[i] = t[i]) != '\0')
-        i++;
-}
-
-void strcpy2(char *s, char *t)
-{
+    char *tmp = s;
     while (*s++ = *t++)
         ;
+    return tmp;
+}
+
+char* strncpy2(char *s, const char *t, int l)
+{
+    char *tmp = s;
+    int i = 0;
+    while (i++ < l)
+        *s++ = *t++;
+    return tmp;
 }
