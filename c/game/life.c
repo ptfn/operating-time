@@ -3,32 +3,26 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define DELAY 1e5
 
 typedef struct {
-    uint8_t x, y;
-} point;
+    uint16_t h, w;
+} Size;
 
-void generate_arr(uint8_t x, uint8_t y, bool arr[x][y])
+void copy_array(Size s, bool main[s.h][s.w], bool copy[s.h][s.w])
 {
-    for (uint8_t i = 0; i < x; i++)
-        for (uint8_t j = 0; j < y; j++)
-            arr[i][j] = false;
-}
-
-void copy_array(uint8_t n, uint8_t m, bool main[n][m], bool copy[n][m])
-{
-    for (uint8_t i = 0; i < n; i++)
-        for (uint8_t j = 0; j < m; j++)
+    for (uint16_t i = 0; i < s.h; i++)
+        for (uint16_t j = 0; j < s.w; j++)
             copy[i][j] = main[i][j];
 }
 
-void stop(uint8_t n, uint8_t m, bool grid[n][m], WINDOW *win)
+void stop(Size s, bool grid[s.h][s.w], WINDOW *win)
 {
     bool run = true;
     wattron(win, A_STANDOUT);
-    mvwprintw(win, m-1, 0, "STOP");
+    mvwprintw(win, s.w-1, 0, "STOP");
     wattroff(win, A_STANDOUT);
 
     while (run) {
@@ -38,11 +32,10 @@ void stop(uint8_t n, uint8_t m, bool grid[n][m], WINDOW *win)
             MEVENT event;
             if (getmouse(&event) == OK) {
                 if (event.bstate && BUTTON1_PRESSED) {
-                    mvwaddch(win, event.y, event.x, '#');
-                    grid[event.x][event.y] = 1;
-                } else if (event.bstate && BUTTON4_PRESSED) {
-                    mvwaddch(win, event.y, event.x, '.');
-                    grid[event.x][event.y] = 0;
+                    if (event.x <= s.h && event.y <= s.w) {
+                        mvwaddch(win, event.y-1, event.x-1, '#');
+                        grid[event.x][event.y] = 1;
+                    }
                 }
             }
         } else {
@@ -58,7 +51,7 @@ void stop(uint8_t n, uint8_t m, bool grid[n][m], WINDOW *win)
     }
 }
 
-void key_event(uint8_t n, uint8_t m, bool grid[n][m], bool *run, WINDOW *win)
+void key_event(Size s, bool grid[s.h][s.w], bool *run, WINDOW *win)
 {
     struct timespec length = {0, 0};
     uint16_t c;
@@ -72,7 +65,7 @@ void key_event(uint8_t n, uint8_t m, bool grid[n][m], bool *run, WINDOW *win)
             break;
 
         case 's': case 'S':
-            stop(n, m, grid, win);
+            stop(s, grid, win);
             break;
 
         default:
@@ -88,37 +81,46 @@ int main()
     curs_set(FALSE);
     keypad(stdscr, TRUE);
     nodelay(stdscr, true);
-
-    WINDOW *win = newwin(0, 0, 0, 0);
-
     mousemask(ALL_MOUSE_EVENTS, NULL);
 
-    point max = {0, 0};
-    getmaxyx(stdscr, max.y, max.x);
+    Size all, temp, swin;
+    getmaxyx(stdscr, all.w, all.h);
 
-    bool grid[max.x][max.y];
-    bool copy[max.x][max.y];
+    WINDOW *win = newwin(all.w-2, all.h-(int)(all.h/100.0*30), 1, 1);
+    getmaxyx(win, swin.w, swin.h);
+
+    bool grid[swin.h][swin.w];
+    bool copy[swin.h][swin.w];
     bool run = true;
-    
-    generate_arr(max.x, max.y, grid);
 
-    while (run) {
+    memset(grid, 0, sizeof(grid)); 
+    memset(copy, 0, sizeof(copy));
+
+    while (run) {  
+       getmaxyx(stdscr, temp.w, temp.h);
+
+       if (temp.h != all.h || temp.w != all.w) {
+            all = temp;
+            wresize(win, all.w-2, all.h-(int)(all.h/100.0*30));
+            getmaxyx(win, swin.w, swin.h);
+       }
+
         /* Print Array */
-        for (uint8_t x = 0; x < max.x; x++)
-            for (uint8_t y = 0; y < max.y; y++)
+        for (uint16_t x = 0; x < swin.h; x++)
+            for (uint16_t y = 0; y < swin.w; y++)
                 if (grid[x][y]) mvwaddch(win, y, x, '#');
                 else mvwaddch(win, y, x, '.');  
        
-        copy_array(max.x, max.y, grid, copy);
+        copy_array(swin, grid, copy);
 
         /* New generation */
-        for (uint8_t x = 0; x < max.x; x++) {
-            for (uint8_t y = 0; y < max.y; y++) {
-                uint8_t neighbor = 0;
-                neighbor = grid[x][(y-1)%max.y] + grid[x][(y+1)%max.y] +
-                           grid[(x-1)%max.x][y] + grid[(x+1)%max.x][y] +
-                           grid[(x-1)%max.x][(y-1)%max.y] + grid[(x-1)%max.x][(y+1)%max.y] +
-                           grid[(x+1)%max.x][(y-1)%max.y] + grid[(x+1)%max.x][(y+1)%max.y];
+        for (uint16_t x = 0; x < swin.h; x++) {
+            for (uint16_t y = 0; y < swin.w; y++) {
+                uint16_t neighbor = 0;
+                neighbor = grid[x][(y-1)%swin.w] + grid[x][(y+1)%swin.w] +
+                           grid[(x-1)%swin.h][y] + grid[(x+1)%swin.h][y] +
+                           grid[(x-1)%swin.h][(y-1)%swin.w] + grid[(x-1)%swin.h][(y+1)%swin.w] +
+                           grid[(x+1)%swin.h][(y-1)%swin.w] + grid[(x+1)%swin.h][(y+1)%swin.w];
 
                 if (grid[x][y]) {
                     if (neighbor < 2 || neighbor > 3) copy[x][y] = false;
@@ -127,8 +129,8 @@ int main()
                 }
             }
         }
-        copy_array(max.x, max.y, copy, grid);
-        key_event(max.x, max.y, grid, &run, win);
+        copy_array(swin, copy, grid);
+        key_event(swin, grid, &run, win);
         usleep(DELAY);
         wrefresh(win);
         werase(win);
