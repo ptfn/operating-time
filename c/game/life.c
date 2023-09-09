@@ -5,6 +5,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+ * Mouse to keyboard
+ * Create new window for mouse
+ * first border write
+ * Fix mirror field
+ */
+
 #define DELAY 1e5
 
 typedef struct {

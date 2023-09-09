@@ -1,7 +1,7 @@
 #include "sha256.h"
 
 #define RR(N, M) (((N) >> (M)) | ((N) << (32 - (M))))
-#define CS(N, M) (N >> M) | (N << ((sizeof(N) * 32 - M) % (sizeof(N) * 32)));
+#define RL(N, M) (((N) << (M)) | ((N) >> (32 - (M))))
 
 void sha256(uint8_t *initial_msg, size_t initial_len, uint8_t hash[])
 {
@@ -43,8 +43,8 @@ void sha256(uint8_t *initial_msg, size_t initial_len, uint8_t hash[])
         uint32_t *W = (uint32_t*)(msg + offset);
 
         for (uint32_t i = 16; i < 64; i++) {
-            uint32_t s0 = CS(W[i-15], 7) ^ CS(W[i-15], 18) ^ RR(W[i-15], 3);
-            uint32_t s1 = CS(W[i-2], 17) ^ CS(W[i-2], 19) ^ RR(W[i-2], 10);
+            uint32_t s0 = RL(W[i-15], 7) ^ RL(W[i-15], 18) ^ RR(W[i-15], 3);
+            uint32_t s1 = RL(W[i-2], 17) ^ RL(W[i-2], 19) ^ RR(W[i-2], 10);
             W[i] = W[i-16] + s0 + W[i-7] + s1;
         }
         
@@ -62,10 +62,10 @@ void sha256(uint8_t *initial_msg, size_t initial_len, uint8_t hash[])
         for (uint32_t i = 0; i < 64; i++) {
             uint32_t S0, S1, Ma, Ch, t1, t2;
             
-            S0 = CS(A, 2) ^ CS(A, 13) ^ CS(A, 22);
+            S0 = RL(A, 2) ^ RL(A, 13) ^ RL(A, 22);
             Ma = (A & B) ^ (A & C) ^ (B & C);
             t2 = S0 + Ma;
-            S1 = CS(E, 6) ^ CS(E, 11) ^ CS(E, 25);
+            S1 = RL(E, 6) ^ RL(E, 11) ^ RL(E, 25);
             Ch = (E & F) ^ ((~E) & G);
             t1 = H + S1 + Ch + K[i] + W[i];
 
