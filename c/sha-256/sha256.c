@@ -1,4 +1,5 @@
 #include "sha256.h"
+#include <stdint.h>
 
 #define RR(N, M) (((N) >> (M)) | ((N) << (32 - (M))))
 #define RL(N, M) (((N) << (M)) | ((N) >> (32 - (M))))
@@ -24,11 +25,9 @@ void sha256(uint8_t *initial_msg, size_t initial_len, uint8_t hash[])
     uint32_t h5 = 0x9b05688c;    // F
     uint32_t h6 = 0x1f83d9ab;    // G
     uint32_t h7 = 0x5be0cd19;    // H
-
-
     
     /* Changing And Modifying A Message */
-    uint8_t *msg = NULL;
+    /*  uint8_t *msg = NULL;
     uint32_t new_len = ((((initial_len + 8) / 64) + 1) * 64) - 8;
  
     msg = calloc(new_len + 64, 1);
@@ -37,10 +36,12 @@ void sha256(uint8_t *initial_msg, size_t initial_len, uint8_t hash[])
  
     uint32_t bits_len = 8*initial_len;
     memcpy(msg + new_len, &bits_len, 4);
+    */
+
     
     /* Main Loop */
-    for(uint32_t offset=0; offset<new_len; offset += (512/8)) {
-        uint32_t *W = (uint32_t*)(msg + offset);
+    for(uint32_t offset = 0; offset < new_len; offset += (512/8)) {
+        uint32_t W[64];
 
         for (uint32_t i = 16; i < 64; i++) {
             uint32_t s0 = RL(W[i-15], 7) ^ RL(W[i-15], 18) ^ RR(W[i-15], 3);
@@ -89,34 +90,19 @@ void sha256(uint8_t *initial_msg, size_t initial_len, uint8_t hash[])
 
     }
 
-    free(msg);
+    // free(msg);
 
     /* Build Hash */
-    uint8_t *p, a[9], b[9], c[9], d[9], e[9], f[9], g[9], h[9];
-    
-    p = (uint8_t*) & h0;
-    sprintf(a, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h1;
-    sprintf(b, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h2;
-    sprintf(c, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h3;
-    sprintf(d, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h4;
-    sprintf(e, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h5;
-    sprintf(f, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h6;
-    sprintf(g, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
-    
-    p = (uint8_t*) & h7;
-    sprintf(h, "%2.2x%2.2x%2.2x%2.2x", p[0], p[1], p[2], p[3]);
+    uint8_t *temp, array_end[8][9];
+    uint32_t array_begin[8] = {h0, h1, h2, h3, h4, h5, h6, h7};
 
-    sprintf(hash, "%s %s %s %s %s %s %s %s", a, b, c, d, e, f, g, h);
+    for (int i = 0; i < 8; i++) {
+        temp = (uint8_t*) & array_begin[i];
+        sprintf((char*)array_end[i], "%2.2x%2.2x%2.2x%2.2x", temp[0], temp[1], temp[2], temp[3]);
+    }
+
+    sprintf((char*)hash, "%s%s%s%s%s%s%s%s", array_end[0], array_end[1],
+                                             array_end[2], array_end[3], 
+                                             array_end[4], array_end[5],
+                                             array_end[6], array_end[7]);
 }

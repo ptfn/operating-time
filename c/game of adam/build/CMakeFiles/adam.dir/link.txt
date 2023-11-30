@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/adam.dir/src/main.c.o -o /home/ptfn/.local/bin/adam  /usr/lib/x86_64-linux-gnu/libSDL2.so 

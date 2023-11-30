@@ -1,67 +1,76 @@
-#include <stdbool.h>
 #include <ncurses.h>
-#include <unistd.h>
+#include <stdbool.h>
 #include <stdint.h>
-#include <stdlib.h>
 #include <string.h>
-
-/*
- * Mouse to keyboard
- * Create new window for mouse
- * first border write
- * Fix mirror field
- */
+#include <stdlib.h>
+#include <unistd.h>
 
 #define DELAY 1e5
+#define ENTER 10
 
 typedef struct {
-    uint16_t h, w;
+    uint16_t w, h;
 } Size;
 
-void copy_array(Size s, bool main[s.h][s.w], bool copy[s.h][s.w])
+typedef struct {
+    uint16_t x, y;
+} Point;
+
+static void init(void)
 {
-    for (uint16_t i = 0; i < s.h; i++)
-        for (uint16_t j = 0; j < s.w; j++)
-            copy[i][j] = main[i][j];
+    initscr();
+    noecho();
+    keypad(stdscr, true);
+    curs_set(false);
+    nodelay(stdscr, true);
+
+    use_default_colors();
+    start_color();
+    init_pair(1, COLOR_GREEN, COLOR_GREEN);
+    
+    box(stdscr, 0, 0);
 }
 
-void stop(Size s, bool grid[s.h][s.w], WINDOW *win)
+static void print_grid(WINDOW *win, Size s, bool grid[s.w][s.h])
 {
-    bool run = true;
-    wattron(win, A_STANDOUT);
-    mvwprintw(win, s.w-1, 0, "STOP");
-    wattroff(win, A_STANDOUT);
-
-    while (run) {
-        int c = wgetch(stdscr); 
-                
-        if (c == KEY_MOUSE) {
-            MEVENT event;
-            if (getmouse(&event) == OK) {
-                if (event.bstate && BUTTON1_PRESSED) {
-                    if (event.x <= s.h && event.y <= s.w) {
-                        mvwaddch(win, event.y-1, event.x-1, '#');
-                        grid[event.x][event.y] = 1;
-                    }
-                }
-            }
-        } else {
-            switch (c) {
-                case 's': case 'S':
-                    run = false;
-                    break;
-               default:
-                    break;
-            } 
+    for (uint16_t i = 0; i < s.w; i++) {
+        for (uint16_t j = 0; j < s.h; j++) {
+            if (grid[i][j]) {
+                wattron(win, COLOR_PAIR(1));
+                printw("  ");
+                wattroff(win, COLOR_PAIR(1));
+            } else
+                printw("  ");
         }
-        wrefresh(win);
+        printw("\n");
     }
 }
 
-void key_event(Size s, bool grid[s.h][s.w], bool *run, WINDOW *win)
+static void generation(Size s, bool grid[s.w][s.h])
 {
-    struct timespec length = {0, 0};
+    bool copy[s.w][s.h];
+    memset(copy, 0, sizeof(copy));
+
+    for (uint16_t i = 0; i < s.w; i++) {
+        for (uint16_t j = 0, n; j < s.h; j++, n = 0) {
+            for (int16_t x = i - 1; x <= i + 1; x++)
+                for (int16_t y = j - 1; y <= j + 1; y++)
+                    if (grid[(x + s.w) % s.w][(y + s.h) % s.h]) n++;
+            if (grid[i][j]) n--;
+            copy[i][j] = (n == 3 || (n == 2 && grid[i][j]));
+        }
+    }
+
+    for (uint16_t i = 0; i < s.w; i++)
+        for (uint16_t j = 0; j < s.h; j++)
+            grid[i][j] = copy[i][j];
+}
+
+static void key_event(Point *p, Size s, bool grid[s.w][s.h], bool *run)
+{
+    struct timespec length = {1, 0};
     uint16_t c;
+
     fd_set rfds;
     FD_ZERO(&rfds);
     FD_SET(STDIN_FILENO, &rfds);
@@ -70,79 +79,47 @@ void key_event(Size s, bool grid[s.h][s.w], bool *run, WINDOW *win)
         case 'q': case 'Q':
             *run = false;
             break;
-
-        case 's': case 'S':
-            stop(s, grid, win);
-            break;
-
+        case KEY_UP: p->y--; break;
+        case KEY_DOWN: p->y++; break;
+        case KEY_RIGHT: p->x++; break;
+        case KEY_LEFT: p->x--; break;
+        case ENTER: grid[p->x][p->y] = 1; break;
+        case 'n': case 'N': generation(s, grid); break;
         default:
             pselect(1, &rfds, NULL, NULL, &length, NULL);
     }
 }
 
-
-int main()
+int main(void)
 {
-    initscr();
-    noecho();
-    curs_set(FALSE);
-    keypad(stdscr, TRUE);
-    nodelay(stdscr, true);
-    mousemask(ALL_MOUSE_EVENTS, NULL);
+    init(); // Init Ncurses
 
-    Size all, temp, swin;
-    getmaxyx(stdscr, all.w, all.h);
+    Size std, main; // Alloc Variables
+    getmaxyx(stdscr, std.h, std.w);
+    std.w = std.w / 2;
 
-    WINDOW *win = newwin(all.w-2, all.h-(int)(all.h/100.0*30), 1, 1);
-    getmaxyx(win, swin.w, swin.h);
+    Point mouse = {std.w/2, std.h/2}; // Position Mouse (keyboard)
 
-    bool grid[swin.h][swin.w];
-    bool copy[swin.h][swin.w];
-    bool run = true;
+    WINDOW *win = newwin(std.h-2, std.w-2, 1, 1); // Create Main Window
+    getmaxyx(win, main.h, main.w);
 
-    memset(grid, 0, sizeof(grid)); 
-    memset(copy, 0, sizeof(copy));
+    bool grid[main.w][main.h], run = true; // Create Grid Game
+    memset(grid, 0, sizeof(grid));
 
-    while (run) {  
-       getmaxyx(stdscr, temp.w, temp.h);
+    while (run) {
+        wclear(win);
 
-       if (temp.h != all.h || temp.w != all.w) {
-            all = temp;
-            wresize(win, all.w-2, all.h-(int)(all.h/100.0*30));
-            getmaxyx(win, swin.w, swin.h);
-       }
+        wattron(win, COLOR_PAIR(1));
+        print_grid(win, main, grid);
+        wattroff(win, COLOR_PAIR(1));
 
-        /* Print Array */
-        for (uint16_t x = 0; x < swin.h; x++)
-            for (uint16_t y = 0; y < swin.w; y++)
-                if (grid[x][y]) mvwaddch(win, y, x, '#');
-                else mvwaddch(win, y, x, '.');  
-       
-        copy_array(swin, grid, copy);
+        key_event(&mouse, main, grid, &run);
+        mvwaddch(win, mouse.y, mouse.x, 'x');
 
-        /* New generation */
-        for (uint16_t x = 0; x < swin.h; x++) {
-            for (uint16_t y = 0; y < swin.w; y++) {
-                uint16_t neighbor = 0;
-                neighbor = grid[x][(y-1)%swin.w] + grid[x][(y+1)%swin.w] +
-                           grid[(x-1)%swin.h][y] + grid[(x+1)%swin.h][y] +
-                           grid[(x-1)%swin.h][(y-1)%swin.w] + grid[(x-1)%swin.h][(y+1)%swin.w] +
-                           grid[(x+1)%swin.h][(y-1)%swin.w] + grid[(x+1)%swin.h][(y+1)%swin.w];
-
-                if (grid[x][y]) {
-                    if (neighbor < 2 || neighbor > 3) copy[x][y] = false;
-                } else {
-                    if (neighbor == 3) copy[x][y] = true;
-                }
-            }
-        }
-        copy_array(swin, copy, grid);
-        key_event(swin, grid, &run, win);
-        usleep(DELAY);
         wrefresh(win);
-        werase(win);
+        // usleep(DELAY);
     }
-
     endwin();
+
     return 0;
 }

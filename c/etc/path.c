@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int main(int atgc, char **argv)
+int main(int argc, char **argv)
 {
     char *run_dir = (char *)malloc(1024);
     if (getcwd(run_dir, 1024) != NULL) {

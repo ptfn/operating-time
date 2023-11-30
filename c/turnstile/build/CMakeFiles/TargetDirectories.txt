@@ -1,0 +1,3 @@
+/home/ptfn/Project/operating-time/c/turnstile/build/CMakeFiles/turnstile.dir
+/home/ptfn/Project/operating-time/c/turnstile/build/CMakeFiles/edit_cache.dir
+/home/ptfn/Project/operating-time/c/turnstile/build/CMakeFiles/rebuild_cache.dir
