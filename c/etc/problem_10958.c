@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -15,7 +16,7 @@ int operation(int a, int b, char oper)
         case '|': result = (a*10)+b; break;
         case '^': result = (int)pow(a, b); break;
         case '*': result = a * b; break;
-        case '/': result = a / b; break;
+        case '/': result = a / b; break; // Problem not count float numbers only int
         case '+': result = a + b; break;
         case '-': result = a - b; break;    
     default:
@@ -115,16 +116,51 @@ void action(const char *string, int size, char *result)
     sprintf(result, "%d", result_number);
 }
 
-// int parser(char *string, int size)
-// {
+char *slice(const char *string, size_t start, size_t end)
+{
+    char *buffer = (char*)malloc((end-start) * sizeof(char));
+    size_t j = 0;
+    for (size_t i = start; i <= end; ++i)
+        buffer[j++] = string[i];
+    buffer[j] = 0;
+    return buffer;
+}
 
-// }
+char *gluing(char *string, char *temp_number, int size, int start, int end)
+{
+    int offset = 0;
+    char *temp = (char*)malloc(size + strlen(temp_number) * sizeof(char)) ;
+    offset += sprintf(temp, "%s", slice(string, start, end));
+    offset += sprintf(temp+offset, "%s", temp_number);
+    offset += sprintf(temp+offset, "%s", slice(string, start, end));
+    return temp; 
+}
+
+int parser(char *string, int size)
+{
+    int i = 0, begin, end;
+    char temp_number[256], result[256]; // malloc in condition
+
+    while (i < size) {
+        if (string[i] == '(') {
+            begin = i;
+        } else if (string[i] == ')') {
+            end = i;
+            char *temp = slice(string, begin, end);
+            action(temp, strlen(temp), temp_number); // len is (end - begin)
+            char *temp_gluing = gluing(string, temp_number, size, begin, end);
+            puts(temp_gluing);
+            i = 0;
+        }
+    }
+    return 0;
+}
 
 int main(void)
 {
-    char *string = "9+8*7";
+    char *string = "(2+1)/2";
     char result[10];
-    action(string, sizeof(string)-1, result);
+    action(string, strlen(string), result);
     puts(result);
     return 0;
 }

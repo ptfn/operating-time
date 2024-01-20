@@ -46,7 +46,7 @@ uint8_t *base64_encode(uint8_t *str, size_t len)
         res[j++] = dict[res2];
         res[j++] = ch2 ? dict[res3] : dict[64];
         res[j++] = ch3 ? dict[res4] : dict[64];
-    
+    } 
     return res;
 }
 
