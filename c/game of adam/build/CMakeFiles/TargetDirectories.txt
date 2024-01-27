@@ -1,3 +1,0 @@
-/home/ptfn/Project/operating-time/c/game of adam/build/CMakeFiles/adam.dir
-/home/ptfn/Project/operating-time/c/game of adam/build/CMakeFiles/edit_cache.dir
-/home/ptfn/Project/operating-time/c/game of adam/build/CMakeFiles/rebuild_cache.dir
