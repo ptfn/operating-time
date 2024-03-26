@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include<stdio.h>
 
 unsigned int rand(){
     static unsigned int seed = 4541;
@@ -7,7 +7,7 @@ unsigned int rand(){
 }
 
 int main(){
-    for(int n = 0; n <= 10; n++){
+    for(int n = 0; n <= 50; n++){
         printf("%d:\t%d\n",n+1,rand());
     }
 }

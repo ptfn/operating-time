@@ -75,10 +75,8 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_AUDIO);
     init_audio();
     
-    for (int i = 500; i > 400; i-=10) {
-        Beep(i, 10);
-    }
     Beep(500, 100);
+    Beep(200, 200);
 
     wait_audio();
     return 0;

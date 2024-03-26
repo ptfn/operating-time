@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/status.dir/main.c.o -o /home/ptfn/.local/bin/status  libSTATUSLib.a 

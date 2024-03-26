@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSTATUSLib.a CMakeFiles/STATUSLib.dir/status.c.o
+/usr/bin/ranlib libSTATUSLib.a

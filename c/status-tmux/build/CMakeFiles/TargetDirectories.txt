@@ -1,0 +1,4 @@
+/home/ptfn/Projects/operating-time/c/status-tmux/build/CMakeFiles/STATUSLib.dir
+/home/ptfn/Projects/operating-time/c/status-tmux/build/CMakeFiles/status.dir
+/home/ptfn/Projects/operating-time/c/status-tmux/build/CMakeFiles/edit_cache.dir
+/home/ptfn/Projects/operating-time/c/status-tmux/build/CMakeFiles/rebuild_cache.dir

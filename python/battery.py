@@ -18,5 +18,5 @@ while True:
         print("Discharged ({}%)".format(persent))
     elif power == True:
         print("Charging ({}%)".format(persent))
-        
+
     time.sleep(time_period)
