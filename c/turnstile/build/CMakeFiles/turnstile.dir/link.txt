@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/turnstile.dir/src/main.c.o -o turnstile  /usr/lib/x86_64-linux-gnu/libcrypto.a -ldl 

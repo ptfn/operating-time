@@ -8,6 +8,7 @@
 static secp256k1_context *ctx = NULL;
 static secp256k1_pubkey pubkey;
 static sha3_context c;
+static uint64_t k;
 
 static void slice(uint8_t *str, uint8_t *buffer, size_t start, size_t end)
 {
@@ -73,7 +74,7 @@ int main(int argc, char *argv[])
         hash = sha3_Finalize(&c);
 
         /* Input Keys */
-
+        #if 0
         printf("Private Key:\t");
         print_hex(seckey, sizeof(seckey));
 
@@ -82,6 +83,10 @@ int main(int argc, char *argv[])
 
         printf("Addres:\t\t");
         print_hash(hash, adress);
+        #endif
+
+        printf("%ld\n", k);
+        k++;
     } while (strncmp(adress, argv[1], 42));
 
     return 0;
